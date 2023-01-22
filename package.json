@@ -1,0 +1,33 @@
+{
+  "name": "mern-app",
+  "version": "1.0.0",
+  "description": "Mern stack",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shurikdurik/mern-app.git"
+  },
+  "keywords": [
+    "mern",
+    "react"
+  ],
+  "author": "Oleksandr Iatseniuk <chava160389@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shurikdurik/mern-app/issues"
+  },
+  "homepage": "https://github.com/shurikdurik/mern-app#readme",
+  "dependencies": {
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
