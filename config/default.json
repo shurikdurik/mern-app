@@ -1,4 +1,5 @@
 {
   "port": 8000,
+  "jwtSecret": "shurik project mern",
   "mongoUri": "mongodb+srv://shurik:Iatseniuk30@cluster0.4heknca.mongodb.net/?retryWrites=true&w=majority"
 }
