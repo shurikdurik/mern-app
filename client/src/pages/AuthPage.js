@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import {useHttp} from '../hooks/http.hook'
+import { useMessage } from "../hooks/message.hook";
 
 export const AuthPage = () => {
 
-    const {loading, request, error, clearError} = useHttp()
+    const auth = useContext(AuthContext)
 
+    const {loading, request, error, clearError} = useHttp()
+    const message = useMessage()
     const [form, setForm] = useState({
         email: '',
         password: ''
     });
+
+    useEffect(() => {
+        message(error);
+        clearError()
+    }, [error, message, clearError])
 
     const changeHandler = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -17,11 +26,21 @@ export const AuthPage = () => {
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
-            console.log(data);
+            message(data.message)
         } catch (error) {
-            
+            console.log(error);
         }
     }
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 'POST', {...form});
+            auth.login(data.token, data.userId)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
         <div className='row'>
@@ -57,13 +76,14 @@ export const AuthPage = () => {
                        <button 
                             className="btn green darken-4" 
                             style={{marginRight: 10}}
-                            onClick={registerHandler}
+                            onClick={loginHandler}
                         >
                                 Login
                             </button>
                        <button 
                             className="btn grey lighten-5 black-text"
                             disabled={loading}
+                            onClick={registerHandler}
                         >
                             Registration
                         </button>
