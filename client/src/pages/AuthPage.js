@@ -17,7 +17,11 @@ export const AuthPage = () => {
     useEffect(() => {
         message(error);
         clearError()
-    }, [error, message, clearError])
+    }, [error, message, clearError]);
+
+    useEffect(() => {
+        window.M.updateTextFields()
+    }, [])
 
     const changeHandler = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -54,7 +58,8 @@ export const AuthPage = () => {
                                 placeholder="Enter your e-mail" 
                                 id="email"
                                 name="email"
-                                type="text" 
+                                type="text"
+                                value={form.email} 
                                 className="validate" 
                                 onChange={changeHandler}
                             />
@@ -66,6 +71,7 @@ export const AuthPage = () => {
                                 id="password" 
                                 name="password"
                                 type="password" 
+                                value={form.password} 
                                 className="validate" 
                                 onChange={changeHandler}
                             />
